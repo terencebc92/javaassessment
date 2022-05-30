@@ -1,7 +1,6 @@
 package com.generation.model;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Student
     extends Person
@@ -9,35 +8,49 @@ public class Student
 {
 
     float PASS_MIN_GRADE = 3.0f;
+    private List<Course> courses;
+
 
     public Student( String id, String name, String email, Date birthDate )
     {
         super( id, name, email, birthDate );
+        this.courses = new ArrayList<>();
     }
 
-    public void enrollToCourse( Course course )
+    public boolean enrollToCourse( Course course )
     {
-        //TODO
+        if (!courses.contains(course)){
+            courses.add(course);
+            return true;
+        }
+        return false;
     }
 
-    @Override
+    @Override // edited
     public List<Course> findPassedCourses()
     {
-        //TODO
-        return null;
+        //Convert list to stream and apply filter method (checking for grades >= minimum pass grade)
+        //Then re-convert the stream to a list and return the filtered list.
+        return courses.stream().filter(course -> course.getGrade() >= PASS_MIN_GRADE).toList();
     }
 
     public Course findCourseById( String courseId )
     {
-        //TODO
-       return null;
+        //Loop through student's course list
+        //Use the course.getCode method and check if equivalent to courseID that's passed in
+        //If equal, then return that course
+        for(Course course: courses) {
+            if(course.getCode().equals(courseId)){
+                return course;
+            }
+        }
+        return null;
     }
 
     @Override
     public List<Course> getEnrolledCourses()
     {
-        //TODO
-        return null;
+        return courses;
     }
 
     @Override

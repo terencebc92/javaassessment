@@ -71,8 +71,11 @@ public class Main
             return;
         }
         System.out.println( course );
-        studentService.enrollToCourse( studentId, course );
-        System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
+        if(studentService.enrollToCourse( studentId, course )){
+            System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
+        } else {
+            System.out.println("Student is already registered to course!");
+        }
 
     }
 
@@ -86,6 +89,8 @@ public class Main
         if (!studentService.showSummary())
         {
             System.out.println("No Student Yet");
+        } else {
+            System.out.println(studentService);
         }
     }
 
@@ -94,8 +99,15 @@ public class Main
 
         Student student = getStudentInformation( studentService, scanner );
         System.out.println( "Enrolled course:" );
+        // List the courses
+        System.out.println(student.getEnrolledCourses());
+        System.out.print( "Insert course ID to be graded: " );
+        String courseID = scanner.next();
+        Course course = student.findCourseById(courseID);
+        System.out.println("Insert course grade for: " + course.getName());
+        double grade = scanner.nextDouble();
+        course.setGrade(grade);
 
-        //TODO
 
     }
 
