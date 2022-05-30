@@ -1,5 +1,5 @@
 # Java Assessment
-A pre-built system (inclusive of codes) were provided but some features were missing in the program.
+A pre-built system (inclusive of codes) was provided but some features were missing in the program.
 Our task was to implement missing features in the Student and StudentServices classes to achieve the desired output as outlined in the project requirements.
 
 Features include: 
